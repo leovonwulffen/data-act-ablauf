@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geschäftsgeheimnisschutz – Zeitlicher Ablauf und Verweigerung</title>
+<style>
+/* ---------------------------------------------------------------------------
+   SCHRIFT HASKÖY
+
+   Die drei Schriftdateien müssen im SELBEN Ordner liegen wie diese Datei:
+
+     Haskoy-Regular.woff2
+     Haskoy-SemiBold.woff2
+     Haskoy-Bold.woff2
+
+   Zu finden im Hasköy-Repository unter  fonts/woff2/
+   Heißen die Dateien anders, unten die Namen anpassen.
+
+   Fehlen die Dateien, greift automatisch Helvetica Neue.
+   --------------------------------------------------------------------------- */
+@font-face{
+  font-family:"Haskoy";
+  src:url("Haskoy-Regular.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Haskoy";
+  src:url("Haskoy-SemiBold.woff2") format("woff2");
+  font-weight:600;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Haskoy";
+  src:url("Haskoy-Bold.woff2") format("woff2");
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  --papier:#F0F0F2;
+  --karte:#FFFFFF;
+  --tinte:#1A1A1A;
+  --tinte-weich:#5E5E66;
+  --linie:#D6D6DA;
+  --dap:#6023F2;
+  --dap-weich:#EBE4FE;
+  --ja:#3AAB5E;
+  --nein:#E03A28;
+  --offen:#B0740F;
+  --offen-weich:#FBF2E0;
+
+  --schrift:"Haskoy","Hasköy","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--papier);
+  color:var(--tinte);
+  font-family:var(--schrift);
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:70px;
+}
+
+/* ---------- Folienkopf ---------- */
+.folie{max-width:1440px;margin:0 auto;padding:38px 52px 0}
+.folienthema{font-size:32px;font-weight:700;color:var(--dap);letter-spacing:-.018em;margin-bottom:6px}
+.folienhinweis{font-size:14px;line-height:1.6;color:var(--tinte-weich);margin-bottom:34px;max-width:86ch}
+
+/* ---------- Diagramm ---------- */
+.buehne{position:relative;overflow-x:auto;padding-bottom:10px}
+.raster{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(268px,1fr));
+  grid-auto-rows:minmax(112px,auto);
+  gap:70px 96px;
+  min-width:940px;
+}
+#leitungen{position:absolute;inset:0;pointer-events:none;z-index:0}
+
+.knoten{
+  position:relative;z-index:1;
+  background:var(--karte);
+  border:none;border-radius:2px;
+  box-shadow:0 1px 4px rgba(26,26,26,.10);
+  padding:20px 22px;
+  cursor:pointer;font-family:inherit;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;
+  text-align:center;
+  transition:transform .13s ease,box-shadow .13s ease;
+}
+.knoten:hover{transform:translateY(-2px);box-shadow:0 5px 18px rgba(26,26,26,.16)}
+.knoten:focus-visible{outline:none;box-shadow:0 0 0 3px var(--dap-weich),0 0 0 4.5px var(--dap)}
+.knoten.ist-aktiv{box-shadow:0 0 0 3px var(--dap-weich),0 0 0 4.5px var(--dap)}
+
+.knoten-titel{font-size:15.5px;font-weight:700;line-height:1.32;letter-spacing:-.006em}
+.knoten-zusatz{font-size:14px;font-weight:400;line-height:1.4}
+.knoten-normen{font-size:12px;color:var(--tinte-weich);margin-top:3px}
+
+.knoten[data-typ="entscheidung"] .knoten-zusatz{color:var(--dap);font-weight:700;font-size:15px}
+.knoten[data-typ="ja"] .knoten-titel{color:var(--ja)}
+.knoten[data-typ="nein"] .knoten-titel{color:var(--nein)}
+.knoten-nr{font-weight:700}
+.knoten[data-typ="ja"] .knoten-nr,
+.knoten[data-typ="nein"] .knoten-nr{color:var(--tinte)}
+
+.beleg-marke{
+  position:absolute;top:9px;right:10px;
+  font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--offen);background:var(--offen-weich);
+  padding:2px 6px;border-radius:2px;font-weight:700;
+}
+
+/* ---------- Legende ---------- */
+.legende{
+  margin-top:38px;padding-top:20px;
+  border-top:1px solid var(--linie);
+  display:flex;gap:40px;flex-wrap:wrap;align-items:center;
+  font-size:13px;color:var(--tinte-weich);
+}
+.legende-eintrag{display:flex;align-items:center;gap:8px}
+.legende-strich{width:16px;height:2.5px;flex-shrink:0}
+.legende-kachel{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+.stand{
+  margin-top:22px;font-size:12.5px;line-height:1.6;
+  color:var(--tinte-weich);max-width:96ch;
+}
+
+/* ---------- Detailtafel ---------- */
+.schleier{position:fixed;inset:0;background:rgba(26,26,26,.32);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:15}
+.schleier.ist-offen{opacity:1;pointer-events:auto}
+.tafel{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(508px,100%);
+  background:var(--papier);
+  box-shadow:-8px 0 34px rgba(26,26,26,.14);
+  transform:translateX(100%);
+  transition:transform .26s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;z-index:20;
+}
+.tafel.ist-offen{transform:translateX(0)}
+.tafel-kopf{
+  position:sticky;top:0;background:var(--papier);
+  border-bottom:1.5px solid var(--tinte);
+  padding:24px 28px 15px;display:flex;gap:14px;align-items:flex-start;
+}
+.tafel-kopf-text{flex:1;min-width:0}
+.tafel-schritt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:6px}
+.tafel-titel{font-size:22px;font-weight:700;line-height:1.24;letter-spacing:-.016em}
+.schliessen{
+  border:1px solid #BFBFC4;background:transparent;width:30px;height:30px;
+  border-radius:2px;cursor:pointer;font-size:17px;line-height:1;
+  color:var(--tinte-weich);flex-shrink:0;font-family:inherit;
+}
+.schliessen:hover{background:#E4E4E8;color:var(--tinte)}
+.schliessen:focus-visible{outline:2px solid var(--dap);outline-offset:1px}
+
+.tafel-koerper{padding:24px 28px 60px}
+.abschnitt{margin-bottom:24px}
+.abschnitt:last-child{margin-bottom:0}
+.abschnitt-marke{
+  font-size:11px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;
+  color:var(--tinte-weich);margin-bottom:8px;padding-bottom:5px;
+  border-bottom:1px solid var(--linie);
+}
+.abschnitt-text{font-size:14.5px;line-height:1.6}
+.normen-zeile{font-size:13.5px;font-weight:700;color:var(--dap)}
+.quelle-zeile{font-size:13px;color:var(--tinte-weich);font-style:italic}
+
+.warnbox{background:var(--offen-weich);border-left:3px solid var(--offen);padding:14px 16px;font-size:13.5px;line-height:1.58}
+.warnbox-marke{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--offen);font-weight:700;display:block;margin-bottom:5px}
+.hinweis-kasten{margin-top:12px;background:var(--dap-weich);border-left-color:var(--dap)}
+
+.fuss{
+  max-width:1440px;margin:34px auto 0;padding:18px 52px 0;
+  border-top:1px solid var(--linie);
+  font-size:12.5px;color:var(--tinte-weich);line-height:1.55;
+}
+.fuss code{font-family:"SF Mono",Menlo,Consolas,monospace;background:#E4E4E8;padding:1px 5px;border-radius:2px;font-size:11.5px}
+
+@media (max-width:900px){
+  .folie,.fuss{padding-left:22px;padding-right:22px}
+  .folienthema{font-size:23px}
+  .tafel{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="folie">
+  <h1 class="folienthema">Geschäftsgeheimnisschutz – Zeitlicher Ablauf und Verweigerung</h1>
+  <p class="folienhinweis">Vom Zugangsverlangen bis zu Behörde und Sanktion. Jeder Schritt lässt sich anklicken und zeigt Rechtsgrundlage, Zeitmaßstab, Praxishinweis und Quellenlage. <span id="disclaimer"></span></p>
+
+  <main class="buehne">
+    <svg id="leitungen" aria-hidden="true"></svg>
+    <div class="raster" id="raster"></div>
+  </main>
+
+  <section class="legende">
+    <span class="legende-eintrag"><span class="legende-strich" style="background:var(--tinte)"></span>Regelablauf</span>
+    <span class="legende-eintrag"><span class="legende-strich" style="background:var(--ja)"></span>Schutz ausreichend</span>
+    <span class="legende-eintrag"><span class="legende-strich" style="background:var(--nein)"></span>Schutz nicht ausreichend</span>
+  </section>
+
+  <p class="stand" id="stand"></p>
+</div>
+
+<div class="schleier" id="schleier"></div>
+
+<aside class="tafel" id="tafel" role="dialog" aria-labelledby="tafel-titel" tabindex="-1">
+  <div class="tafel-kopf">
+    <div class="tafel-kopf-text">
+      <span class="tafel-schritt" id="tafel-schritt"></span>
+      <h2 class="tafel-titel" id="tafel-titel"></h2>
+    </div>
+    <button class="schliessen" id="schliessen" aria-label="Detailansicht schließen">×</button>
+  </div>
+  <div class="tafel-koerper" id="tafel-koerper"></div>
+</aside>
+
+<script src="daten.js"></script>
+<script>
+const raster   = document.getElementById('raster');
+const svg      = document.getElementById('leitungen');
+const tafel    = document.getElementById('tafel');
+const schleier = document.getElementById('schleier');
+let aktiverKnoten = null;
+
+const FARBE = { ja:'#3AAB5E', nein:'#E03A28', normal:'#1A1A1A' };
+const SCHRIFT = '"Haskoy","Hasköy","Helvetica Neue",Helvetica,Arial,sans-serif';
+
+function knotenBauen(){
+  raster.innerHTML = SCHRITTE.map(s=>`
+    <button class="knoten" id="k-${s.id}" data-id="${s.id}" data-typ="${s.typ}"
+            style="grid-column:${s.spalte};grid-row:${s.zeile}"
+            aria-label="Schritt ${s.nummer}: ${s.titel}">
+      <span class="knoten-titel"><span class="knoten-nr">${s.nummer}.</span> ${s.titel}</span>
+      ${s.zusatz ? `<span class="knoten-zusatz">${s.zusatz}</span>` : ''}
+      ${s.normen ? `<span class="knoten-normen">${s.normen}</span>` : ''}
+    </button>`).join('');
+
+  raster.querySelectorAll('.knoten').forEach(k=>{
+    k.addEventListener('click',()=>tafelOeffnen(k));
+  });
+}
+
+function pfeileZeichnen(){
+  const box = raster.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+  svg.style.width  = box.width + 'px';
+  svg.style.height = box.height + 'px';
+
+  let defs = '<defs>';
+  Object.entries(FARBE).forEach(([n,f])=>{
+    defs += `<marker id="spitze-${n}" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="${f}"/></marker>`;
+  });
+  defs += '</defs>';
+
+  const pos = id=>{
+    const el = document.getElementById('k-'+id).getBoundingClientRect();
+    return {
+      l:el.left-box.left, r:el.right-box.left,
+      t:el.top-box.top,   b:el.bottom-box.top,
+      cx:el.left-box.left+el.width/2,
+      cy:el.top-box.top+el.height/2
+    };
+  };
+
+  let inhalt = defs;
+
+  VERBINDUNGEN.forEach(v=>{
+    const a = pos(v.von), b = pos(v.nach);
+    const typ = v.labelTyp || 'normal';
+    const f = FARBE[typ];
+    let d, lx, ly, anker='middle';
+
+    const gleicheZeile  = Math.abs(a.cy-b.cy) < 26;
+    const gleicheSpalte = Math.abs(a.cx-b.cx) < 26;
+
+    if(gleicheZeile){
+      const rechts = b.cx > a.cx;
+      const x1 = rechts ? a.r : a.l;
+      const x2 = rechts ? b.l : b.r;
+      d = `M ${x1} ${a.cy} L ${x2} ${b.cy}`;
+      lx = (x1+x2)/2; ly = a.cy-13;
+    } else if(gleicheSpalte){
+      const runter = b.cy > a.cy;
+      const y1 = runter ? a.b : a.t;
+      const y2 = runter ? b.t : b.b;
+      d = `M ${a.cx} ${y1} L ${b.cx} ${y2}`;
+      lx = a.cx+18; ly = (y1+y2)/2; anker='start';
+    } else {
+      const runter = b.cy > a.cy;
+      const y1 = runter ? a.b : a.t;
+      const rechts = b.cx > a.cx;
+      const x2 = rechts ? b.l : b.r;
+      // Verzweigungen aus demselben Knoten leicht versetzt führen,
+      // damit sich die beiden Äste nicht überdecken.
+      const sx = a.cx + (rechts ? 14 : -14);
+      d = `M ${sx} ${y1} L ${sx} ${b.cy} L ${x2} ${b.cy}`;
+      ly = (y1+b.cy)/2 - 4;
+      lx = rechts ? sx+16 : sx-16;
+      anker = rechts ? 'start' : 'end';
+    }
+
+    inhalt += `<path d="${d}" fill="none" stroke="${f}" stroke-width="1.8"
+                 stroke-linejoin="miter" marker-end="url(#spitze-${typ})"/>`;
+
+    if(v.label){
+      inhalt += `<text x="${lx}" y="${ly}" fill="${f}"
+                   text-anchor="${anker}" dominant-baseline="middle"
+                   style="font-family:${SCHRIFT};font-size:14px;font-weight:700;
+                          paint-order:stroke;stroke:#F0F0F2;stroke-width:5px">${v.label}</text>`;
+    }
+  });
+
+  svg.innerHTML = inhalt;
+}
+
+function tafelOeffnen(el){
+  const s = SCHRITTE.find(x=>x.id===el.dataset.id);
+  if(aktiverKnoten) aktiverKnoten.classList.remove('ist-aktiv');
+  el.classList.add('ist-aktiv');
+  aktiverKnoten = el;
+
+  const farbe = s.typ==='ja'    ? 'var(--ja)'
+              : s.typ==='nein'  ? 'var(--nein)'
+              : s.typ==='folge' ? 'var(--offen)' : 'var(--dap)';
+
+  const kopf = document.getElementById('tafel-schritt');
+  kopf.textContent = 'Schritt ' + s.nummer;
+  kopf.style.color = farbe;
+  document.getElementById('tafel-titel').textContent = s.titel;
+
+  let h = '';
+  if(s.was)     h += abschnitt('Was passiert', `<p class="abschnitt-text">${s.was}</p>`);
+  if(s.frist)   h += abschnitt('Frist und Zeitmaßstab', `<p class="abschnitt-text">${s.frist}</p>`);
+  if(s.hinweis) h += abschnitt('Praxishinweis',
+      `<p class="abschnitt-text">${s.hinweis}</p>` +
+      (s.hinweisKasten ? `<div class="warnbox hinweis-kasten">${s.hinweisKasten}</div>` : ''));
+  if(s.normen)  h += abschnitt('Rechtsgrundlage', `<p class="normen-zeile">${s.normen}</p>`);
+  if(s.quelle)  h += abschnitt('Belegt durch', `<p class="quelle-zeile">${s.quelle}</p>`);
+
+  if(s.offenerPunkt){
+    h += `<div class="abschnitt"><div class="warnbox">
+            <span class="warnbox-marke">Noch abzusichern</span>${s.offenerPunkt}
+          </div></div>`;
+  }
+
+  document.getElementById('tafel-koerper').innerHTML = h;
+  document.getElementById('tafel-koerper').scrollTop = 0;
+  tafel.classList.add('ist-offen');
+  schleier.classList.add('ist-offen');
+}
+
+function abschnitt(marke, inhalt){
+  return `<div class="abschnitt"><div class="abschnitt-marke">${marke}</div>${inhalt}</div>`;
+}
+
+function tafelSchliessen(){
+  tafel.classList.remove('ist-offen');
+  schleier.classList.remove('ist-offen');
+  if(aktiverKnoten){ aktiverKnoten.classList.remove('ist-aktiv'); aktiverKnoten.focus(); aktiverKnoten=null; }
+}
+
+document.getElementById('schliessen').addEventListener('click', tafelSchliessen);
+schleier.addEventListener('click', tafelSchliessen);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') tafelSchliessen(); });
+
+function randbereicheBauen(){
+  if(typeof DISCLAIMER !== 'undefined'){
+    document.getElementById('disclaimer').textContent = DISCLAIMER;
+  }
+  if(typeof STAND !== 'undefined'){
+    document.getElementById('stand').textContent = STAND;
+  }
+}
+
+knotenBauen();
+randbereicheBauen();
+requestAnimationFrame(pfeileZeichnen);
+window.addEventListener('resize', ()=>requestAnimationFrame(pfeileZeichnen));
+if(document.fonts) document.fonts.ready.then(pfeileZeichnen);
+</script>
+</body>
+</html>
