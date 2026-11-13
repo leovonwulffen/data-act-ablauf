@@ -41,7 +41,7 @@ const SCHRITTE = [
     spalte: 2, zeile: 1, typ: "normal", beleg: "belegt",
 
     was: "Vor der Geheimnisprüfung steht die Vorfrage, ob der Anspruch überhaupt besteht. Zu prüfen sind die Berechtigung des Antragstellers als Nutzer oder zulässiger Dritter, die Eröffnung des Anwendungsbereichs, die Einordnung als ohne Weiteres verfügbare Produkt- oder verbundene Dienstdaten, die Betroffenheit personenbezogener Daten und Rechte Dritter sowie die hinreichende Bestimmtheit des Antrags.",
-    hinweis: "Bei der Identitätsprüfung gilt eine Grenze. Nach Art. 4 Abs. 5 DA darf der Dateninhaber nur die dafür erforderlichen Informationen verlangen. Ein Verstoß ist nach § 15 Abs. 2 Nr. 3 DADG bußgeldbewehrt. Lässt sich der Antrag nur teilweise erfüllen, ist die Teilbereitstellung zu prüfen, statt insgesamt abzulehnen.",
+    hinweis: "Bei der Identitätsprüfung gilt eine Grenze. Nach Art. 4 Abs. 5 DA darf der Dateninhaber nur die dafür erforderlichen Informationen verlangen. Ein Verstoß ist nach § 15 Abs. 2 Nr. 3 des Datenverordnung-Anwendungs-und-Durchsetzungs-Gesetzes (DADG) bußgeldbewehrt. Lässt sich der Antrag nur teilweise erfüllen, ist die Teilbereitstellung zu prüfen, statt insgesamt abzulehnen.",
     normen: "Art. 2, Art. 3 DA · Art. 4 Abs. 3 bis 5 DA · § 15 Abs. 2 Nr. 3 DADG",
     quelle: "Verordnung (EU) 2023/2854 · DADG, BGBl. 2026 I Nr. 157"
   },
@@ -53,9 +53,9 @@ const SCHRITTE = [
     spalte: 3, zeile: 1, typ: "normal", beleg: "belegt",
 
     was: "Der Dateninhaber prüft datenfeldbezogen, ob die verlangten Daten Geschäftsgeheimnisse enthalten und welcher Offenlegungsschaden droht. Eine eigenständige Prüfpflicht mit dieser Bezeichnung enthält der Data Act nicht, sie folgt mittelbar aus den Schutzvorschriften, weil Schutzmaßnahmen nur verlangt werden können, wenn das Geheimnis zuvor bestimmt ist.",
-    hinweis: "Logdaten und Wartungsprotokolle sind nicht pauschal Geschäftsgeheimnisse. Sie können solche enthalten, wenn sie Rückschlüsse auf Produktionsabläufe, Fehlerquoten, Konfigurationen oder Wartungsstrategien zulassen. Auch Geheimnisse Dritter, etwa von Zulieferern, sind zu erfassen. Eine pauschale Einstufung sämtlicher Betriebsdaten als Geheimnis wird voraussichtlich nicht genügen. Praktisch hilft ein Dateninventar mit markierten Geheimnissen und dokumentiertem Schadensszenario.",
+    hinweis: "Logdaten und Wartungsprotokolle sind nicht pauschal Geschäftsgeheimnisse. Sie können solche enthalten, wenn sie Rückschlüsse auf Produktionsabläufe, Fehlerquoten, Konfigurationen oder Wartungsstrategien zulassen. Auch Geheimnisse Dritter, etwa von Zulieferern, sind zu erfassen. Eine pauschale Einstufung sämtlicher Betriebsdaten als Geheimnis wird voraussichtlich nicht genügen. Praktisch hilft ein Dateninventar mit markierten Geheimnissen und dokumentiertem Schadensszenario. Die Kommission stellt in ihren FAQ klar, dass die bloße Behauptung, bestimmte Daten seien Geschäftsgeheimnisse, nicht genügt, um die Ausübung der Zugangsrechte zu verhindern. Der Dateninhaber muss die betroffenen Geheimnisse vor der Weitergabe konkret bestimmen.",
     normen: "Art. 4 Abs. 6 DA · Begriff über die Richtlinie (EU) 2016/943",
-    quelle: "Kiefer/Schneider, GRUR-Prax 2025, 648, Rn. 7–8, 25"
+    quelle: "Kiefer/Schneider, GRUR-Prax 2025, 648, Rn. 7–8, 25 · FAQ Data Act 1.4, Q23"
   },
   {
     id: "s4",
@@ -91,7 +91,7 @@ const SCHRITTE = [
 
     was: "Sind die Maßnahmen ausreichend und umgesetzt, sind die Daten bereitzustellen. Die Bereitstellung darf auf die erforderlichen Daten, Personen, Zwecke und Zeiträume begrenzt werden.",
     hinweis: "Zulässig ist die Kontrolle der vereinbarten Schutzmaßnahmen im erforderlichen Umfang, nicht eine umfassende Verhaltensüberwachung des Nutzers. Bei einem Verstoß kann die weitere Bereitstellung für die Zukunft verweigert werden. Der Verstoß ist zu dokumentieren und die Entscheidung verhältnismäßig zu begründen. Eine rückwirkende Sanktionierung bereits rechtmäßig bereitgestellter Daten folgt daraus nicht.",
-    normen: "Art. 4 Abs. 6, 7 DA · Art. 5 DA · ergänzend §§ 4 ff. GeschGehG bei unbefugter Nutzung",
+    normen: "Art. 4 Abs. 6, 7 DA · Art. 5 DA · ergänzend §§ 4 ff. Geschäftsgeheimnisgesetz (GeschGehG) bei unbefugter Nutzung",
     quelle: "Verordnung (EU) 2023/2854"
   },
   {
@@ -101,12 +101,12 @@ const SCHRITTE = [
     zusatz: "Begründung an den Nutzer und Mitteilung an die Behörde",
     spalte: 3, zeile: 3, typ: "nein", beleg: "belegt",
 
-    was: "Nach Art. 4 Abs. 7 DA darf der Dateninhaber die Weitergabe verweigern oder aussetzen, wenn keine Einigung über die Schutzmaßnahmen zustande kommt, der Nutzer vereinbarte Maßnahmen nicht umsetzt oder die Vertraulichkeit verletzt. Nach Art. 4 Abs. 8 DA ist im Einzelfall auch eine vollständige Ablehnung möglich, wenn der Dateninhaber nachweist, dass trotz der Schutzmaßnahmen mit hoher Wahrscheinlichkeit ein schwerer wirtschaftlicher Schaden droht. Der Nachweis beruht auf objektiven Tatsachen, etwa der Durchsetzbarkeit des Geheimnisschutzes in Drittländern, der Art und dem Vertraulichkeitsgrad der Daten sowie der Neuheit des Produkts.",
+    was: "Nach Art. 4 Abs. 7 DA darf der Dateninhaber die Weitergabe verweigern oder aussetzen, wenn keine Einigung über die Schutzmaßnahmen zustande kommt, der Nutzer vereinbarte Maßnahmen nicht umsetzt oder die Vertraulichkeit verletzt. Nach Art. 4 Abs. 8 DA ist im Einzelfall auch eine vollständige Ablehnung möglich, wenn der Dateninhaber nachweist, dass trotz der Schutzmaßnahmen mit hoher Wahrscheinlichkeit ein schwerer wirtschaftlicher Schaden droht. Der Nachweis beruht auf objektiven Tatsachen, etwa der Durchsetzbarkeit des Geheimnisschutzes in Drittländern, der Art und dem Vertraulichkeitsgrad der Daten sowie der Neuheit des Produkts. Die Kommission versteht den schweren wirtschaftlichen Schaden in ihren FAQ als schweren und irreparablen wirtschaftlichen Verlust und betont, dass darüber im Einzelfall zu entscheiden ist.",
     hinweis: "Die vollständige Verweigerung ist kein Regelmodell. Vorrangig sind Schwärzung, Herausgabe nicht sensibler Teile, Aggregation oder Pseudonymisierung. Beide Absätze verlangen zusätzlich eine Mitteilung an die nach Art. 37 DA benannte Behörde, in Deutschland die Bundesnetzagentur. Diese Mitteilung ist keine Genehmigung, der Dateninhaber muss also nicht zuwarten. Eine Ablehnung sollte die betroffenen Datenkategorien, das konkrete Geheimnis, das Schadensszenario, die geprüften milderen Mittel und den Hinweis auf Beschwerde und Streitbeilegung enthalten.",
-    frist: "Begründung nach Art. 4 Abs. 7 DA und Nachweis nach Art. 4 Abs. 8 DA sind dem Nutzer unverzüglich und schriftlich zu übermitteln. Eine feste Frist in Tagen nennt der Data Act nicht. Unterbleibt die Mitteilung oder der Nachweis, droht ein Bußgeld bis 50 000 Euro nach § 15 Abs. 2 Nr. 4 und 5, Abs. 4 DADG.",
+    frist: "Begründung nach Art. 4 Abs. 7 DA und Nachweis nach Art. 4 Abs. 8 DA sind dem Nutzer unverzüglich und schriftlich zu übermitteln. Eine feste Frist in Tagen nennt der Data Act nicht. Unterbleibt die Mitteilung oder der Nachweis, droht ein Bußgeld bis 50 000 Euro nach § 15 Abs. 2 Nr. 4 und 5, Abs. 4 des Datenverordnung-Anwendungs-und-Durchsetzungs-Gesetzes (DADG).",
     normen: "Art. 4 Abs. 7, 8 DA · für die Weitergabe Art. 5 Abs. 10, 11 DA · § 15 Abs. 2 Nr. 4, 5 DADG",
-    quelle: "Verordnung (EU) 2023/2854 · DADG, BGBl. 2026 I Nr. 157 · Kiefer/Schneider, GRUR-Prax 2025, 648, Rn. 16–18",
-    hinweisKasten: "Welche Schwelle „schwerer wirtschaftlicher Schaden“ konkret erreicht, ist bislang nicht durch Rechtsprechung oder Verwaltungspraxis geklärt. Die Begründung muss den Einzelfall tragen."
+    quelle: "Verordnung (EU) 2023/2854 · DADG, BGBl. 2026 I Nr. 157 · Kiefer/Schneider, GRUR-Prax 2025, 648, Rn. 16–18 · FAQ Data Act 1.4, Q23",
+    hinweisKasten: "Wann ein schwerer und irreparabler wirtschaftlicher Verlust im Einzelfall anzunehmen ist, ist durch Rechtsprechung oder Verwaltungspraxis bislang nicht geklärt. Die Begründung muss den Einzelfall tragen."
   },
   {
     id: "s7",
@@ -115,11 +115,11 @@ const SCHRITTE = [
     zusatz: "Bundesnetzagentur · § 2 Abs. 1 DADG",
     spalte: 2, zeile: 4, typ: "folge", beleg: "belegt",
 
-    was: "Drei Wege sind zu unterscheiden. Die Beschwerde bei der zuständigen Behörde nach Art. 38 DA, das Verfahren der nach Art. 37 DA benannten Behörde, in Deutschland nach § 2 Abs. 1 DADG die Bundesnetzagentur, und die Streitbeilegung durch zugelassene Stellen nach Art. 10 DA, die die Bundesnetzagentur nach § 5 DADG zulässt und in einem öffentlichen Verzeichnis führt.",
-    hinweis: "Der Behördenweg ist keine zwingende Vorstufe eines Zivilverfahrens. Der Zivilrechtsweg bleibt daneben offen, in Betracht kommen Leistungsklage, einstweiliger Rechtsschutz und Schadensersatz. Wer der Behörde Unterlagen vorlegt, muss Geschäftsgeheimnisse nach § 10 DADG kennzeichnen und eine einsehbare Fassung beifügen. Fehlt sie, kann die Behörde von einer Einwilligung in die Einsicht ausgehen. Für personenbezogene Daten ist nach § 3 DADG grundsätzlich der Bundesbeauftragte für den Datenschutz und die Informationsfreiheit zuständig, beide Behörden arbeiten zusammen.",
+    was: "Drei Wege sind zu unterscheiden. Die Beschwerde bei der zuständigen Behörde nach Art. 38 DA, das Verfahren der nach Art. 37 DA benannten Behörde, in Deutschland nach § 2 Abs. 1 des Datenverordnung-Anwendungs-und-Durchsetzungs-Gesetzes (DADG) die Bundesnetzagentur, und die Streitbeilegung durch zugelassene Stellen nach Art. 10 DA, die die Bundesnetzagentur nach § 5 DADG zulässt und in einem öffentlichen Verzeichnis führt.",
+    hinweis: "Der Behördenweg ist keine zwingende Vorstufe eines Zivilverfahrens. Nach Art. 4 Abs. 9 und Art. 5 Abs. 12 DA können Nutzer und Dritte die Entscheidung des Dateninhabers vor Gericht und, wenn beide Seiten einverstanden sind, vor einer Streitbeilegungsstelle angreifen. Sie können sich außerdem bei der zuständigen Behörde beschweren, die nach den FAQ der Kommission ohne unangemessene Verzögerung darüber entscheiden soll, ob die Bereitstellung aufzunehmen oder wieder aufzunehmen ist. Der Zivilrechtsweg bleibt daneben offen, in Betracht kommen Leistungsklage, einstweiliger Rechtsschutz und Schadensersatz. Wer der Behörde Unterlagen vorlegt, muss Geschäftsgeheimnisse nach § 10 DADG kennzeichnen und eine einsehbare Fassung beifügen. Fehlt sie, kann die Behörde von einer Einwilligung in die Einsicht ausgehen. Für personenbezogene Daten ist nach § 3 DADG grundsätzlich der Bundesbeauftragte für den Datenschutz und die Informationsfreiheit zuständig, beide Behörden arbeiten zusammen.",
     frist: "Die Bundesnetzagentur kann nach § 9 DADG Abhilfe innerhalb einer angemessenen Frist verlangen und die erforderlichen Maßnahmen anordnen. Zur Durchsetzung steht ein Zwangsgeld bis 500 000 Euro zur Verfügung.",
-    normen: "Art. 10, Art. 37, Art. 38 DA · §§ 2, 3, 5, 6, 9, 10 DADG",
-    quelle: "DADG vom 26. Mai 2026, BGBl. 2026 I Nr. 157, in Kraft seit 30. Mai 2026"
+    normen: "Art. 4 Abs. 9, Art. 5 Abs. 12 DA · Art. 10, Art. 37, Art. 38 DA · §§ 2, 3, 5, 6, 9, 10 DADG",
+    quelle: "DADG vom 26. Mai 2026, BGBl. 2026 I Nr. 157 · FAQ Data Act 1.4, Q23, Q40"
   },
   {
     id: "s8",
@@ -128,8 +128,8 @@ const SCHRITTE = [
     zusatz: "§ 15 DADG · §§ 6 ff. GeschGehG",
     spalte: 2, zeile: 5, typ: "folge", beleg: "belegt",
 
-    was: "Art. 40 DA verpflichtet die Mitgliedstaaten zu wirksamen, verhältnismäßigen und abschreckenden Sanktionen. Deutschland hat sie in § 15 DADG ausgestaltet. Wer Daten entgegen Art. 4 Abs. 1 Satz 1 oder Art. 5 Abs. 1 Satz 1 DA nicht, nicht richtig, nicht vollständig oder nicht rechtzeitig bereitstellt, handelt nach § 15 Abs. 2 Nr. 2 DADG ordnungswidrig. Bußgeldbehörde ist nach § 15 Abs. 7 und § 16 DADG die Bundesnetzagentur.",
-    hinweis: "Bußgeldverfahren und Zivilverfahren sind zu trennen. Neben dem Bußgeld bleiben der Anspruch auf Bereitstellung, einstweiliger Rechtsschutz und Schadensersatz. Nutzt oder offenbart der Empfänger ein Geschäftsgeheimnis anschließend unbefugt, greifen die Ansprüche nach §§ 6 bis 10 GeschGehG, die nach § 9 GeschGehG bei Unverhältnismäßigkeit ausgeschlossen sein können.",
+    was: "Art. 40 DA verpflichtet die Mitgliedstaaten zu wirksamen, verhältnismäßigen und abschreckenden Sanktionen. Deutschland hat sie in § 15 des Datenverordnung-Anwendungs-und-Durchsetzungs-Gesetzes (DADG) ausgestaltet. Wer Daten entgegen Art. 4 Abs. 1 Satz 1 oder Art. 5 Abs. 1 Satz 1 DA nicht, nicht richtig, nicht vollständig oder nicht rechtzeitig bereitstellt, handelt nach § 15 Abs. 2 Nr. 2 DADG ordnungswidrig. Bußgeldbehörde ist nach § 15 Abs. 7 und § 16 DADG die Bundesnetzagentur.",
+    hinweis: "Bußgeldverfahren und Zivilverfahren sind zu trennen. Neben dem Bußgeld bleiben der Anspruch auf Bereitstellung, einstweiliger Rechtsschutz und Schadensersatz. Nutzt oder offenbart der Empfänger ein Geschäftsgeheimnis anschließend unbefugt, greifen die Ansprüche nach §§ 6 bis 10 Geschäftsgeheimnisgesetz (GeschGehG), die nach § 9 GeschGehG bei Unverhältnismäßigkeit ausgeschlossen sein können.",
     frist: "Der Bußgeldrahmen des § 15 Abs. 4 DADG ist gestaffelt und reicht von 50 000 Euro über 100 000 und 500 000 Euro bis zu 5 Millionen Euro. Für Unternehmen mit mehr als 250 Millionen Euro Gesamtumsatz tritt nach § 15 Abs. 5 DADG eine Umsatzgrenze von 2 Prozent hinzu. Der höchste Rahmen gilt nicht für die Verweigerung des Datenzugangs, sondern für das Abwerben von Nutzern nach Art. 5 Abs. 3 DA.",
     normen: "Art. 40 DA · § 15, § 16 DADG · §§ 6 bis 10 GeschGehG",
     quelle: "DADG, BGBl. 2026 I Nr. 157, § 15 Abs. 2 Nr. 2, Abs. 4, Abs. 7"
@@ -147,7 +147,10 @@ const VERBINDUNGEN = [
   { von:"s7",  nach:"s8",  label:"" }
 ];
 
-/* Disclaimer, über dem Diagramm */
+/* Text unter der Überschrift. GRUNDLAGEN ist eine Liste, jeder Eintrag ein Absatz. */
 const DISCLAIMER = "Diese Darstellung dient der Orientierung über den typischen Ablauf und stellt keine Rechtsberatung dar. Sie ersetzt insbesondere nicht die Prüfung des Einzelfalls durch eine Rechtsanwältin oder einen Rechtsanwalt. Rechtsstand 7. November 2026.";
 
-const STAND = "Grundlage sind die Verordnung (EU) 2023/2854 und das Datenverordnung-Anwendungs-und-Durchsetzungs-Gesetz (DADG) vom 26. Mai 2026, BGBl. 2026 I Nr. 157. Eine Rechtsprechung speziell zu Art. 4 oder Art. 5 DA und eine konsolidierte Verwaltungspraxis der Bundesnetzagentur zum Geheimnisschutz sind bislang nicht nachgewiesen. Der Digital Omnibus befindet sich im Gesetzgebungsverfahren und ist nicht geltendes Recht, mögliche Änderungen der Art. 4 und 5 DA sind hier nicht eingearbeitet.";
+const GRUNDLAGEN = [
+  "Grundlage sind die Verordnung (EU) 2023/2854 (Data Act), das Datenverordnung-Anwendungs-und-Durchsetzungs-Gesetz (DADG) vom 26. Mai 2026 und das Geschäftsgeheimnisgesetz (GeschGehG) sowie die ausgewertete Fachliteratur. Herangezogen sind außerdem die Frequently Asked Questions der Europäischen Kommission zum Data Act in der Fassung 1.4 vom 22. Januar 2026, die nach eigener Angabe nicht verbindlich sind und keine neuen Pflichten begründen.",
+  "Eine Rechtsprechung zu den Art. 4 und 5 Data Act und eine gefestigte Verwaltungspraxis der Bundesnetzagentur zum Geheimnisschutz liegen bislang nicht vor. Die Darstellung versteht sich deshalb als Orientierung im Sinne einer Best Practice. Der Digital Omnibus befindet sich im Gesetzgebungsverfahren und ist nicht eingearbeitet."
+];

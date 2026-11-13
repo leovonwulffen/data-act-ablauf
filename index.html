@@ -70,7 +70,16 @@ body{
 /* ---------- Folienkopf ---------- */
 .folie{max-width:1440px;margin:0 auto;padding:38px 52px 0}
 .folienthema{font-size:32px;font-weight:700;color:var(--dap);letter-spacing:-.018em;margin-bottom:6px}
-.folienhinweis{font-size:14px;line-height:1.6;color:var(--tinte-weich);margin-bottom:34px;max-width:86ch}
+.vorspann{
+  margin:0 0 34px;padding-top:18px;border-top:1px solid var(--linie);
+}
+.folienhinweis{
+  font-size:14px;line-height:1.7;color:var(--tinte-weich);
+  margin:0 0 11px;text-align:justify;hyphens:auto;-webkit-hyphens:auto;
+}
+.folienhinweis:last-child{margin-bottom:0}
+.folienhinweis strong{color:var(--tinte);font-weight:600}
+@media (max-width:760px){.folienhinweis{text-align:left}}
 
 /* ---------- Diagramm ---------- */
 .buehne{position:relative;overflow-x:auto;padding-bottom:10px}
@@ -198,7 +207,11 @@ body{
 
 <div class="folie">
   <h1 class="folienthema">Geschäftsgeheimnisschutz – Zeitlicher Ablauf und Verweigerung</h1>
-  <p class="folienhinweis">Vom Zugangsverlangen bis zu Behörde und Sanktion. Jeder Schritt lässt sich anklicken und zeigt Rechtsgrundlage, Zeitmaßstab, Praxishinweis und Quellenlage. <span id="disclaimer"></span></p>
+  <div class="vorspann">
+    <p class="folienhinweis"><strong>Vom Zugangsverlangen bis zu Behörde und Sanktion.</strong> Jeder Schritt lässt sich anklicken und zeigt Rechtsgrundlage, Zeitmaßstab und Praxishinweis. <span id="disclaimer"></span></p>
+    <p class="folienhinweis" id="grundlagen"></p>
+    <p class="folienhinweis" id="einordnung"></p>
+  </div>
 
   <main class="buehne">
     <svg id="leitungen" aria-hidden="true"></svg>
@@ -211,7 +224,6 @@ body{
     <span class="legende-eintrag"><span class="legende-strich" style="background:var(--nein)"></span>Schutz nicht ausreichend</span>
   </section>
 
-  <p class="stand" id="stand"></p>
 </div>
 
 <div class="schleier" id="schleier"></div>
@@ -350,7 +362,6 @@ function tafelOeffnen(el){
       `<p class="abschnitt-text">${s.hinweis}</p>` +
       (s.hinweisKasten ? `<div class="warnbox hinweis-kasten">${s.hinweisKasten}</div>` : ''));
   if(s.normen)  h += abschnitt('Rechtsgrundlage', `<p class="normen-zeile">${s.normen}</p>`);
-  if(s.quelle)  h += abschnitt('Belegt durch', `<p class="quelle-zeile">${s.quelle}</p>`);
 
   if(s.offenerPunkt){
     h += `<div class="abschnitt"><div class="warnbox">
@@ -382,8 +393,12 @@ function randbereicheBauen(){
   if(typeof DISCLAIMER !== 'undefined'){
     document.getElementById('disclaimer').textContent = DISCLAIMER;
   }
-  if(typeof STAND !== 'undefined'){
-    document.getElementById('stand').textContent = STAND;
+  if(typeof GRUNDLAGEN !== 'undefined'){
+    const absaetze = Array.isArray(GRUNDLAGEN) ? GRUNDLAGEN : [GRUNDLAGEN];
+    ['grundlagen','einordnung'].forEach((id,i)=>{
+      const el = document.getElementById(id);
+      if(absaetze[i]) el.textContent = absaetze[i]; else el.remove();
+    });
   }
 }
 

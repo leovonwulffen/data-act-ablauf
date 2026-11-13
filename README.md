@@ -45,14 +45,18 @@ berechnet, gerade bei gleicher Zeile oder Spalte, sonst als Stufe. Zweige aus
 demselben Knoten werden seitlich versetzt geführt, damit sie sich nicht
 überdecken.
 
-**Felder je Schritt:** `was`, `frist` (optional), `hinweis`, `normen`, `quelle`,
+**Felder je Schritt:** `was`, `frist` (optional), `hinweis`, `normen` (das Feld
+`quelle` ist weiterhin gepflegt, wird aber seit dem 13.11.2026 nicht mehr
+angezeigt),
 dazu zwei optionale Felder für offene Punkte. `hinweisKasten` setzt den Text in
 einen ockerfarbenen Kasten innerhalb des Praxishinweises, `offenerPunkt` hängt
 ihn als eigenen Abschnitt „Noch abzusichern“ unten an. Beide erzeugen die Marke
 „offen“ am Kasten im Diagramm.
 
-**Disclaimer und Fußtext:** `DISCLAIMER` steht über dem Diagramm, `STAND`
-darunter. Beide am Ende von `daten.js`.
+**Disclaimer und Grundlagen:** `DISCLAIMER` und `GRUNDLAGEN` stehen als zwei
+Absätze über dem Diagramm. Beide am Ende von `daten.js`. `GRUNDLAGEN` nennt die
+herangezogenen Gesetze und die Literatur, die fehlende Rechtsprechung und den
+Charakter als Orientierung.
 
 **Typen** steuern Farbe und Rahmen:
 
